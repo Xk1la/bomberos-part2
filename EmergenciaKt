@@ -1,0 +1,47 @@
+package com.example.bomberos
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        val ednombre = findViewById<EditText>(R.id.nombre2)
+        val edtObac = findViewById<EditText>(R.id.obac)
+        val edtVoluntarios = findViewById<EditText>(R.id.vol)
+        val edtEmergencia = findViewById<EditText>(R.id.emergencia)
+        val edtDireccion = findViewById<EditText>(R.id.direc)
+        val edtUnidad = findViewById<EditText>(R.id.unidad)
+        val edtHoraSalida = findViewById<EditText>(R.id.horasalida)
+        val edtHoraLlegada = findViewById<EditText>(R.id.horallegada)
+        val btnEnviar = findViewById<Button>(R.id.button)
+
+        btnEnviar.setOnClickListener {
+            val intent = Intent(this,Emergencia::class.java)
+            intent.putExtra("nombre de quien crea la lista", ednombre.text.toString())
+            intent.putExtra("obac", edtObac.text.toString())
+            intent.putExtra("voluntarios", edtVoluntarios.text.toString())
+            intent.putExtra("emergencia", edtEmergencia.text.toString())
+            intent.putExtra("direccion", edtDireccion.text.toString())
+            intent.putExtra("unidad", edtUnidad.text.toString())
+            intent.putExtra("horaSalida", edtHoraSalida.text.toString())
+            intent.putExtra("horaLlegada", edtHoraLlegada.text.toString())
+
+            startActivity(intent)
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.textnombre)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+}
