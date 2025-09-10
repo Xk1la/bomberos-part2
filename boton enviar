@@ -1,0 +1,13 @@
+ btnEnviar.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra("nombre", ednombre.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("obac", edtObac.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("voluntarios", edtVoluntarios.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("emergencia", edtEmergencia.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("direccion", edtDireccion.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("unidad", edtUnidad.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("horaSalida", edtHoraSalida.text.toString().substringAfter(": ").trim())
+            resultIntent.putExtra("horaLlegada", edtHoraLlegada.text.toString().substringAfter(": ").trim())
+            setResult(RESULT_OK, resultIntent)
+            finish() // cierra MainActivity y regresa a Emergencia
+        }
