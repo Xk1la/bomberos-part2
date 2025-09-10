@@ -1,0 +1,64 @@
+package com.example.bomberos
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var edNombre: EditText
+    private lateinit var edtObac: EditText
+    private lateinit var edtVoluntarios: EditText
+    private lateinit var edtEmergencia: EditText
+    private lateinit var edtDireccion: EditText
+    private lateinit var edtUnidad: EditText
+    private lateinit var edtHoraSalida: EditText
+    private lateinit var edtHoraLlegada: EditText
+    private lateinit var btnEnviar: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+
+        edNombre = findViewById(R.id.nombre2)
+        edtObac = findViewById(R.id.obac)
+        edtVoluntarios = findViewById(R.id.vol)
+        edtEmergencia = findViewById(R.id.emergencia)
+        edtDireccion = findViewById(R.id.direc)
+        edtUnidad = findViewById(R.id.unidad)
+        edtHoraSalida = findViewById(R.id.horasalida)
+        edtHoraLlegada = findViewById(R.id.horallegada)
+        btnEnviar = findViewById(R.id.button)
+
+        // Si es edición, rellenar los datos existentes
+        intent.extras?.let { extras ->
+            edNombre.setText(extras.getString("nombre", ""))
+            edtObac.setText(extras.getString("obac", ""))
+            edtVoluntarios.setText(extras.getString("voluntarios", ""))
+            edtEmergencia.setText(extras.getString("emergencia", ""))
+            edtDireccion.setText(extras.getString("direccion", ""))
+            edtUnidad.setText(extras.getString("unidad", ""))
+            edtHoraSalida.setText(extras.getString("horaSalida", ""))
+            edtHoraLlegada.setText(extras.getString("horaLlegada", ""))
+        }
+
+        btnEnviar.setOnClickListener {
+            val resultIntent = Intent().apply {
+                putExtra("nombre", edNombre.text.toString())
+                putExtra("obac", edtObac.text.toString())
+                putExtra("voluntarios", edtVoluntarios.text.toString())
+                putExtra("emergencia", edtEmergencia.text.toString())
+                putExtra("direccion", edtDireccion.text.toString())
+                putExtra("unidad", edtUnidad.text.toString())
+                putExtra("horaSalida", edtHoraSalida.text.toString())
+                putExtra("horaLlegada", edtHoraLlegada.text.toString())
+            }
+
+            setResult(RESULT_OK, resultIntent)
+            finish() // regresa a Emergencia
+        }
+    }
+}
